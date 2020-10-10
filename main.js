@@ -1,13 +1,37 @@
 $("#landing_page").hide();
+// $(".gameboard1").hide();
+
+// let grid =  [
+//             [0,0,0,0],
+//             [0,2,1,0],
+//             [0,1,2,0],
+//             [0,0,0,0]
+//             ];
+
+let blackCount = document.querySelectorAll(".black").length;
+let whiteCount = document.querySelectorAll(".white").length;
+$("#blackBoardCount").text(blackCount);
+$("#whiteBoardCount").text(whiteCount);
 
 let grid =  [
-            [0,0,0,0],
-            [0,2,1,0],
-            [0,1,2,0],
-            [0,0,0,0]
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,2,1,0,0,0],
+            [0,0,0,1,2,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0]
             ];
 
+
+
 current_player = 0;
+if(current_player){
+    $(".turn").text("White Player's turn");
+} else {
+    $(".turn").text("Black Player's turn");
+}
 
 checkColor = () => {
     for (let index = 0; index < grid.length; index++) {
@@ -34,27 +58,41 @@ checkColor = () => {
             }
         }
     }
-    
+    blackCount = document.querySelectorAll(".black").length;
+    whiteCount = document.querySelectorAll(".white").length;
+    $("#blackBoardCount").text(blackCount);
+    $("#whiteBoardCount").text(whiteCount);
+      
 }
 
 checkColor();
 
-resetTable = () => {
+// $("#reset4").click(function(e){
+//     grid =  [
+//         [0,0,0,0],
+//         [0,2,1,0],
+//         [0,1,2,0],
+//         [0,0,0,0]
+//         ];
+//     checkColor();
+//     current_player = 0;
+// });
+
+$("#reset6").click(function(e){
     grid =  [
-        [0,0,0,0],
-        [0,2,1,0],
-        [0,1,2,0],
-        [0,0,0,0]
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,2,1,0,0,0],
+        [0,0,0,1,2,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0]
         ];
-checkColor();
-}
 
-$("#reset").click(function(e){
-    resetTable();
+    checkColor();
     current_player = 0;
 });
-
-
 
 checkColor();
 
@@ -78,15 +116,12 @@ $(".box").click(function(){
             let newCol = 0;
             newRow = row + chRow;
             newCol = col + chCol;
-            console.log("Outer Row: ",newRow,"Column: ",newCol,"Count :",count);
                 for(j=0;j<grid.length;j++){
                     if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
                         if(grid[newRow][newCol] == 2){
-                            console.log("Change Row :",chRow,"Change Column :",chCol)
                             newRow += chRow;
                             newCol += chCol;
                             count++;
-                            console.log("Row: ",newRow,"Column: ",newCol,"Count :",count);
                         } else if(grid[newRow][newCol] == 1){ 
                             if(count != 0){
                                 let nRow = newRow;
@@ -118,15 +153,12 @@ $(".box").click(function(){
                 let newCol = 0;
                 newRow = row + chRow;
                 newCol = col + chCol;
-                console.log("Outer Row: ",newRow,"Column: ",newCol,"Count :",count);
                     for(j=0;j<grid.length;j++){
                         if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
                             if(grid[newRow][newCol] == 1){
-                                console.log("Change Row :",chRow,"Change Column :",chCol)
                                 newRow += chRow;
                                 newCol += chCol;
                                 count++;
-                                console.log("Row: ",newRow,"Column: ",newCol,"Count :",count);
                             } else if(grid[newRow][newCol] == 2){ 
                                 if(count != 0){
                                     let nRow = newRow;
@@ -153,6 +185,10 @@ $(".box").click(function(){
 
 function changePlayer(){
     current_player = current_player ? 0 : 1;
+    if(current_player){
+        $(".turn").text("White Player's turn");
+    } else {
+        $(".turn").text("Black Player's turn");
+    }
 }
 
-    
