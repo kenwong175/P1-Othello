@@ -1,5 +1,10 @@
-$("#landing_page").hide();
-// $(".gameboard1").hide();
+// $("#landing_page").hide();
+$(".gameboard2").hide();
+
+$("#start").click(function(){
+    $("#landing_page").hide();
+    $(".gameboard2").show();
+});
 
 // let grid =  [
 //             [0,0,0,0],
@@ -29,18 +34,18 @@ let grid =  [
 checkWinner = () => {
     if(moves == 60){
         if(blackCount>whiteCount){
-            $(".turn").text("Black Player wins");
+            $(".turn").text("Apple wins");
         } else {
-            $(".turn").text("White Player wins");
+            $(".turn").text("Android wins");
         }
     }
 }
 
 current_player = 0;
 if(current_player){
-    $(".turn").text("White Player's turn");
+    $(".turn").text("Android's turn");
 } else {
-    $(".turn").text("Black Player's turn");
+    $(".turn").text("Apple's turn");
 }
 
 checkColor = () => {
@@ -103,7 +108,7 @@ $("#reset6").click(function(e){
     checkColor();
     current_player = 0;
     moves = 0;
-    $(".turn").text("Black Player's turn");
+    $(".turn").text("Apple's turn");
 });
 
 checkColor();
@@ -209,9 +214,9 @@ checkWinner();
 function changePlayer(){
     current_player = current_player ? 0 : 1;
     if(current_player){
-        $(".turn").text("White Player's turn");
+        $(".turn").text("Android's turn");
     } else {
-        $(".turn").text("Black Player's turn");
+        $(".turn").text("Apple's turn");
     }
 moves++;
 }
