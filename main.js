@@ -12,6 +12,7 @@ let blackCount = document.querySelectorAll(".black").length;
 let whiteCount = document.querySelectorAll(".white").length;
 $("#blackBoardCount").text(blackCount);
 $("#whiteBoardCount").text(whiteCount);
+let moves = 0;
 
 let grid =  [
             [0,0,0,0,0,0,0,0],
@@ -25,6 +26,15 @@ let grid =  [
             ];
 
 
+checkWinner = () => {
+    if(moves == 60){
+        if(blackCount>whiteCount){
+            $(".turn").text("Black Player wins");
+        } else {
+            $(".turn").text("White Player wins");
+        }
+    }
+}
 
 current_player = 0;
 if(current_player){
@@ -92,6 +102,8 @@ $("#reset6").click(function(e){
 
     checkColor();
     current_player = 0;
+    moves = 0;
+    $(".turn").text("Black Player's turn");
 });
 
 checkColor();
@@ -108,7 +120,9 @@ $(".box").click(function(){
     let surround = [];
 
     for(i=0;i<checkRow.length;i++){
+        if((row+checkRow[i])>-1&&(row+checkRow[i])<8&&(col+checkCol[i])>-1&&(col+checkCol[i])<8){
         surround.push([row+checkRow[i],col+checkCol[i]]);
+        }
     }
 
     if(current_player && !isOccupied){
@@ -188,6 +202,7 @@ $(".box").click(function(){
             changePlayer();
         }
     }
+checkWinner();
 });
 
 
@@ -198,5 +213,6 @@ function changePlayer(){
     } else {
         $(".turn").text("Black Player's turn");
     }
+moves++;
 }
 
