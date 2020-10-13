@@ -34,18 +34,18 @@ let grid =  [
 checkWinner = () => {
     if(moves == 60){
         if(blackCount>whiteCount){
-            $(".turn").text("Apple wins");
+            $(".turn").text("Tea dominated");
         } else {
-            $(".turn").text("Android wins");
+            $(".turn").text("Coffee dominated");
         }
     }
 }
 
 current_player = 0;
 if(current_player){
-    $(".turn").text("Android's turn");
+    $(".turn").text("It's Time for Coffee");
 } else {
-    $(".turn").text("Apple's turn");
+    $(".turn").text("It's Time for Tea");
 }
 
 checkColor = () => {
@@ -54,17 +54,17 @@ checkColor = () => {
             switch (grid[index][key]) {
                 
                 case 0: //blank
-                $("#"+index+key).removeClass("white");
-                $("#"+index+key).removeClass("black");     
+                $("#"+index+key).removeClass("white animate__animated animate__flipInX");
+                $("#"+index+key).removeClass("black animate__animated animate__flipInX");     
                 break;
 
                 case 1: //white
-                $("#"+index+key).addClass("white");
+                $("#"+index+key).addClass("white animate__animated animate__flipInX");
                 $("#"+index+key).removeClass("black");    
                 break;
 
                 case 2: //black
-                $("#"+index+key).addClass("black");
+                $("#"+index+key).addClass("black animate__animated animate__flipInX");
                 $("#"+index+key).removeClass("white");        
                 break;
 
@@ -108,7 +108,7 @@ $("#reset6").click(function(e){
     checkColor();
     current_player = 0;
     moves = 0;
-    $(".turn").text("Apple's turn");
+    $(".turn").text("It's Time for Tea");
 });
 
 checkColor();
@@ -214,9 +214,9 @@ checkWinner();
 function changePlayer(){
     current_player = current_player ? 0 : 1;
     if(current_player){
-        $(".turn").text("Android's turn");
+        $(".turn").text("It's Time for Coffee");
     } else {
-        $(".turn").text("Apple's turn");
+        $(".turn").text("It's Time for Tea");
     }
 moves++;
 }

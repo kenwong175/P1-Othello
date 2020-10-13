@@ -3,21 +3,26 @@
 }
 
 body {
-    width: 40%;
+    font-family: 'Nunito', sans-serif;
+    width: 80%;
     margin: 20px auto;
     background-image: url("bedroom_anime_art-wallpaper-1440x900.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+}
 
+.gameboard2{
+    width: 60%;
+    margin: 20px auto;
 }
 
 #landing_page {
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     text-align: center;
     margin: 200px auto;
     color: white;
 }
-
 
 #game_page4x4 {
     display: grid;
@@ -26,6 +31,7 @@ body {
 }
 
 #game_page8x8 {
+    font-family: 'Nunito', sans-serif;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: 0px;
@@ -36,8 +42,7 @@ body {
 .box {
     width: 100%;
     height: 70px;
-    /* border: 1px solid blue;
-    outline: blue; */
+    border: 1px dotted black;
 }
 
 .white {
@@ -45,6 +50,7 @@ body {
     background-image: url("Coffee.png");
     background-size: cover;
     background-position: center;
+
 }
 
 .black {
@@ -56,14 +62,157 @@ body {
 
 .scoreboard {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     text-align: center;
+    margin-bottom: 10px;
+}
+
+.blackCount *, .whiteCount *{
+    margin: 5px;
+}
+
+.blackCount {
+    min-width: 100px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgb(196, 159, 92) 0%, rgba(220,140,30,1) 100%);
+    border: none;
+    box-shadow: 12px 12px 24px rgba(220,140,30,.64);
+    transition: all 0.3s ease-in-out 0s;
+    outline: none;
+    padding: 0px;
+    color: white;
+}
+
+.whiteCount {
+    min-width: 100px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgb(114, 95, 182) 0%, rgb(51, 18, 170) 100%);
+    border: none;
+    box-shadow: 12px 12px 24px rgba(220,140,30,.64);
+    transition: all 0.3s ease-in-out 0s;
+    outline: none;
+    padding: 0px;
+    color: white;
 }
 
 .turn {
-    font-size: 26px;
+    font-size: 25px;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    margin: 10px auto;
+    background: linear-gradient(90deg, rgb(109, 76, 72) 0%, rgb(94, 24, 15) 100%);
+    width: 400px;
 }
 
 #reset6 {
     margin-top: 10px;
+    min-width: 100px;
+    min-height: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 500;
+    color: white;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgb(175, 74, 74) 0%, rgba(200,30,30,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(170,90,90,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+}
+
+.animate__animated.animate__flipInX {
+    --animate-duration: 2s;
+}
+
+.animate__animated.animate__pulse {
+    --animate-duration: 3s;
+}
+
+#start {
+    min-width: 300px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+}
+  
+#start::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+}
+
+  
+
+  
+#start::after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+  
+#start:hover::after, #start:focus::after {
+    animation: none;
+    display: none;
+}
+  
+@keyframes ring {
+    0% {
+      width: 30px;
+      height: 30px;
+      opacity: 1;
+    }
+    100% {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
 }
