@@ -59,13 +59,13 @@ checkColor = () => {
                 break;
 
                 case 1: //white
+                $("#"+index+key).removeClass("black animate__animated animate__flipInX");    
                 $("#"+index+key).addClass("white animate__animated animate__flipInX");
-                $("#"+index+key).removeClass("black");    
                 break;
 
                 case 2: //black
-                $("#"+index+key).addClass("black animate__animated animate__flipInX");
-                $("#"+index+key).removeClass("white");        
+                $("#"+index+key).removeClass("white animate__animated animate__flipInX");   
+                $("#"+index+key).addClass("black animate__animated animate__flipInX");     
                 break;
 
                 default:
@@ -123,6 +123,9 @@ $(".box").click(function(){
     let checkCol = [-1,-1,-1,0,1,1,1,0];
     let count = 0;
     let surround = [];
+    let convert = 0;
+
+    convert = 0;
 
     for(i=0;i<checkRow.length;i++){
         if((row+checkRow[i])>-1&&(row+checkRow[i])<8&&(col+checkCol[i])>-1&&(col+checkCol[i])<8){
@@ -132,7 +135,6 @@ $(".box").click(function(){
 
     if(current_player && !isOccupied){
         if(document.getElementById(surround[0].join("")).classList.contains("black")||document.getElementById(surround[1].join("")).classList.contains("black")||document.getElementById(surround[2].join("")).classList.contains("black")||document.getElementById(surround[3].join("")).classList.contains("black")||document.getElementById(surround[4].join("")).classList.contains("black")||document.getElementById(surround[5].join("")).classList.contains("black")||document.getElementById(surround[6].join("")).classList.contains("black")||document.getElementById(surround[7].join("")).classList.contains("black")){
-            grid[row][col] = 1;
             for(i=0;i<8;i++){
                 if(row<grid.length && row>-1 && col<grid.length && col>-1){
                 count = 0;
@@ -156,6 +158,7 @@ $(".box").click(function(){
                                         nRow -= chRow;
                                         nCol -= chCol;
                                         grid[nRow][nCol] = 1;
+                                        convert++;
                                     }
                                 }   
                             } else if(grid[newRow][newCol] == 0){
@@ -165,12 +168,14 @@ $(".box").click(function(){
                     }
                 }   
             }
-            checkColor();
-            changePlayer();
+            if(convert !=0 ){
+                grid[row][col] = 1;
+                checkColor();
+                changePlayer();
+            }
         }
     } else if (!current_player && !isOccupied) {
         if(document.getElementById(surround[0].join("")).classList.contains("white")||document.getElementById(surround[1].join("")).classList.contains("white")||document.getElementById(surround[2].join("")).classList.contains("white")||document.getElementById(surround[3].join("")).classList.contains("white")||document.getElementById(surround[4].join("")).classList.contains("white")||document.getElementById(surround[5].join("")).classList.contains("white")||document.getElementById(surround[6].join("")).classList.contains("white")||document.getElementById(surround[7].join("")).classList.contains("white")){
-            grid[row][col] = 2;
             for(i=0;i<8;i++){
                 if(row<grid.length && row>-1 && col<grid.length && col>-1){
                     count = 0;
@@ -194,6 +199,7 @@ $(".box").click(function(){
                                             nRow -= chRow;
                                             nCol -= chCol;
                                             grid[nRow][nCol] = 2;
+                                            convert++;
                                         }
                                     }   
                                 } else {
@@ -203,8 +209,11 @@ $(".box").click(function(){
                         }
                 }  
             }
-            checkColor();
-            changePlayer();
+            if(convert!=0){
+                grid[row][col] = 2;
+                checkColor();
+                changePlayer();
+            }
         }
     }
 checkWinner();
