@@ -170,8 +170,8 @@ $(".box").click(function(){
             }
             if(convert !=0 ){
                 grid[row][col] = 1;
-                checkColor();
                 changePlayer();
+                checkColor();
             }
         }
     } else if (!current_player && !isOccupied) {
@@ -211,11 +211,12 @@ $(".box").click(function(){
             }
             if(convert!=0){
                 grid[row][col] = 2;
-                checkColor();
                 changePlayer();
+                checkColor();
             }
         }
     }
+
 checkWinner();
 });
 

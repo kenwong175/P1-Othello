@@ -8,13 +8,12 @@
 </head>
 <body>
     <div id="landing_page">
-        <div id="coffee"></div>
+        <div class="coffee"></div>
         <div><h1>Welcome to Coffee,Tea or Me?</h1>
-            <h2>Where you decide which is the best</h2>
+            <h2>Where you decide which one is the best</h2>
             <button class="" id="start">Start Game</button>
         </div>
-        <div id="tea"></div>
-       
+        <div class="tea"></div>
     </div>
     <!-- <div class="gameboard1">
         <h1>Othello</h1>
@@ -39,6 +38,7 @@
         <button id="reset4">Reset</button>
     </div> -->
     <div class="gameboard2">
+        <audio src="Air-on-a -g-sring.mp3" autoplay loop id="song"></audio>
         <div class="turn animate__animated animate__pulse animate__infinite"></div>
         <div class="scoreboard">
             <div class="blackCount">
@@ -118,6 +118,10 @@
         </div>
         <button id="reset6">Reset</button>
     </div>
+    <script>
+        let music = document.getElementById("song");
+        music.volume = 0.2;
+    </script>
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>

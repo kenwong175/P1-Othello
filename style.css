@@ -47,17 +47,18 @@ body {
 
 .white {
     /* background-color: white; */
-    background-image: url("Coffee.png");
-    background-size: cover;
+    background-image: url("cupTea_NW.png");
+    background-size: contain;
     background-position: center;
-
+    background-repeat: no-repeat;
 }
 
 .black {
     /* background-color: black; */
-    background-image: url("https://cdn2.foodviva.com/static-content/food-images/tea-recipes/milk-tea-recipe/milk-tea-recipe.jpg");
-    background-size: cover;
+    background-image: url("cupThea_SE.png");
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .scoreboard {
@@ -216,3 +217,4 @@ body {
       opacity: 0;
     }
 }
+
