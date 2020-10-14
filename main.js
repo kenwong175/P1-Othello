@@ -126,25 +126,19 @@ checkColor();
 $(".box").click(function(){
     let id = $(this).attr("id");
     let isOccupied = $(this).hasClass("black") || $(this).hasClass("white");
+    let isPossible = $(this).hasClass("gray");
     let loc = id.split("");
     let row = Number(loc[0]);
     let col = Number(loc[1]);
     let checkRow = [-1,0,1,1,1,0,-1,-1];
     let checkCol = [-1,-1,-1,0,1,1,1,0];
     let count = 0;
-    let surround = [];
     let convert = 0;
 
     convert = 0;
     hidePossibleMoves();
-    for(i=0;i<checkRow.length;i++){
-        if((row+checkRow[i])>-1&&(row+checkRow[i])<8&&(col+checkCol[i])>-1&&(col+checkCol[i])<8){
-        surround.push([row+checkRow[i],col+checkCol[i]]);
-        }
-    }
 
-    if(current_player==1 && !isOccupied){
-        if(document.getElementById(surround[0].join("")).classList.contains("black")||document.getElementById(surround[1].join("")).classList.contains("black")||document.getElementById(surround[2].join("")).classList.contains("black")||document.getElementById(surround[3].join("")).classList.contains("black")||document.getElementById(surround[4].join("")).classList.contains("black")||document.getElementById(surround[5].join("")).classList.contains("black")||document.getElementById(surround[6].join("")).classList.contains("black")||document.getElementById(surround[7].join("")).classList.contains("black")){
+    if(current_player==1 && !isOccupied && isPossible){
             for(i=0;i<8;i++){
                 if(row<grid.length && row>-1 && col<grid.length && col>-1){
                 count = 0;
@@ -183,9 +177,7 @@ $(".box").click(function(){
                 changePlayer();
                 checkColor();
             }
-        }
-    } else if (current_player== 2 && !isOccupied) {
-        if(document.getElementById(surround[0].join("")).classList.contains("white")||document.getElementById(surround[1].join("")).classList.contains("white")||document.getElementById(surround[2].join("")).classList.contains("white")||document.getElementById(surround[3].join("")).classList.contains("white")||document.getElementById(surround[4].join("")).classList.contains("white")||document.getElementById(surround[5].join("")).classList.contains("white")||document.getElementById(surround[6].join("")).classList.contains("white")||document.getElementById(surround[7].join("")).classList.contains("white")){
+    } else if (current_player== 2 && !isOccupied && isPossible) {
             for(i=0;i<8;i++){
                 if(row<grid.length && row>-1 && col<grid.length && col>-1){
                     count = 0;
@@ -225,7 +217,6 @@ $(".box").click(function(){
                 checkColor();
             }
         }
-    }
 checkWinner();
 showPossibleMoves();
 let grayCount = document.querySelectorAll(".gray").length;
@@ -238,6 +229,60 @@ let grayCount = document.querySelectorAll(".gray").length;
             $(".turn").text("It's a tie!");
         }
     }
+    arr = [];
+for(i=0;i<document.getElementsByClassName("gray").length;i++){
+    arr.push(document.getElementsByClassName("gray")[i].id);
+    console.log(arr);
+}
+let randomPick = parseInt(Math.random()*(arr.length-1));
+console.log(randomPick);
+hidePossibleMoves();
+id = arr[randomPick];
+loc = id.split("");
+row = Number(loc[0]);
+col = Number(loc[1]);
+count = 0;
+convert = 0;
+for(i=0;i<8;i++){
+    if(row<grid.length && row>-1 && col<grid.length && col>-1){
+    count = 0;
+    chRow = checkRow[i];
+    chCol = checkCol[i];
+    let newRow = 0;
+    let newCol = 0;
+    newRow = row + chRow;
+    newCol = col + chCol;
+        for(j=0;j<grid.length;j++){
+            if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
+                if(grid[newRow][newCol] == 1+(1+moves)%2){
+                    newRow += chRow;
+                    newCol += chCol;
+                    count++;
+                } else if(grid[newRow][newCol] == 1+moves%2){ 
+                    if(count != 0){
+                        let nRow = newRow;
+                        let nCol = newCol;
+                        for(x=0;x<count;x++){
+                            nRow -= chRow;
+                            nCol -= chCol;
+                            grid[nRow][nCol] = 1+moves%2;
+                            convert++;
+                        }
+                    }   
+                } else if(grid[newRow][newCol] == 0){
+                    break;
+                }
+            }
+        }
+    }   
+}
+if(convert !=0 ){
+    grid[row][col] = 1+moves%2;
+    changePlayer();
+    checkColor();
+}
+checkWinner();
+showPossibleMoves();
 });
 
 
