@@ -35,8 +35,10 @@ checkWinner = () => {
     if(moves == 60){
         if(blackCount>whiteCount){
             $(".turn").text("Tea dominated");
-        } else {
+        } else if(whiteCount>blackCount) {
             $(".turn").text("Coffee dominated");
+        } else {
+            $(".turn").text("It's a tie!");
         }
     }
 }
@@ -115,7 +117,8 @@ $("#reset6").click(function(e){
     checkColor();
     current_player = 1;
     moves = 0;
-    $(".turn").text("It's Time for Tea");
+    $(".turn").text("It's Time for Coffee");
+    showPossibleMoves();
 });
 
 checkColor();
@@ -227,8 +230,13 @@ checkWinner();
 showPossibleMoves();
 let grayCount = document.querySelectorAll(".gray").length;
     if(grayCount == 0){
-        changePlayer();
-        moves--;
+        if(blackCount>whiteCount){
+            $(".turn").text("Tea dominated");
+        } else if(whiteCount>blackCount) {
+            $(".turn").text("Coffee dominated");
+        } else {
+            $(".turn").text("It's a tie!");
+        }
     }
 });
 
