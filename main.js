@@ -41,31 +41,40 @@ checkWinner = () => {
     }
 }
 
-current_player = 0;
-if(current_player){
+current_player = 1;
+if(current_player == 1){
     $(".turn").text("It's Time for Coffee");
 } else {
     $(".turn").text("It's Time for Tea");
 }
 
-checkColor = () => {
+checkColor = () => {    
     for (let index = 0; index < grid.length; index++) {
         for (const key in grid) {
             switch (grid[index][key]) {
                 
                 case 0: //blank
                 $("#"+index+key).removeClass("white animate__animated animate__flipInX");
-                $("#"+index+key).removeClass("black animate__animated animate__flipInX");     
+                $("#"+index+key).removeClass("black animate__animated animate__flipInX");
+                $("#"+index+key).removeClass("gray");        
                 break;
 
-                case 1: //white
+                case 1: //coffee
+                $("#"+index+key).removeClass("gray");  
                 $("#"+index+key).removeClass("black animate__animated animate__flipInX");    
                 $("#"+index+key).addClass("white animate__animated animate__flipInX");
                 break;
 
-                case 2: //black
+                case 2: //tea
+                $("#"+index+key).removeClass("gray");  
                 $("#"+index+key).removeClass("white animate__animated animate__flipInX");   
                 $("#"+index+key).addClass("black animate__animated animate__flipInX");     
+                break;
+
+                case 3:
+                $("#"+index+key).removeClass("white animate__animated animate__flipInX");
+                $("#"+index+key).removeClass("black animate__animated animate__flipInX");
+                $("#"+index+key).addClass("gray");  
                 break;
 
                 default:
@@ -79,8 +88,6 @@ checkColor = () => {
     $("#whiteBoardCount").text(whiteCount);
       
 }
-
-checkColor();
 
 // $("#reset4").click(function(e){
 //     grid =  [
@@ -106,7 +113,7 @@ $("#reset6").click(function(e){
         ];
 
     checkColor();
-    current_player = 0;
+    current_player = 1;
     moves = 0;
     $(".turn").text("It's Time for Tea");
 });
@@ -126,14 +133,14 @@ $(".box").click(function(){
     let convert = 0;
 
     convert = 0;
-
+    hidePossibleMoves();
     for(i=0;i<checkRow.length;i++){
         if((row+checkRow[i])>-1&&(row+checkRow[i])<8&&(col+checkCol[i])>-1&&(col+checkCol[i])<8){
         surround.push([row+checkRow[i],col+checkCol[i]]);
         }
     }
 
-    if(current_player && !isOccupied){
+    if(current_player==1 && !isOccupied){
         if(document.getElementById(surround[0].join("")).classList.contains("black")||document.getElementById(surround[1].join("")).classList.contains("black")||document.getElementById(surround[2].join("")).classList.contains("black")||document.getElementById(surround[3].join("")).classList.contains("black")||document.getElementById(surround[4].join("")).classList.contains("black")||document.getElementById(surround[5].join("")).classList.contains("black")||document.getElementById(surround[6].join("")).classList.contains("black")||document.getElementById(surround[7].join("")).classList.contains("black")){
             for(i=0;i<8;i++){
                 if(row<grid.length && row>-1 && col<grid.length && col>-1){
@@ -146,18 +153,18 @@ $(".box").click(function(){
                 newCol = col + chCol;
                     for(j=0;j<grid.length;j++){
                         if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
-                            if(grid[newRow][newCol] == 2){
+                            if(grid[newRow][newCol] == 1+(1+moves)%2){
                                 newRow += chRow;
                                 newCol += chCol;
                                 count++;
-                            } else if(grid[newRow][newCol] == 1){ 
+                            } else if(grid[newRow][newCol] == 1+moves%2){ 
                                 if(count != 0){
                                     let nRow = newRow;
                                     let nCol = newCol;
                                     for(x=0;x<count;x++){
                                         nRow -= chRow;
                                         nCol -= chCol;
-                                        grid[nRow][nCol] = 1;
+                                        grid[nRow][nCol] = 1+moves%2;
                                         convert++;
                                     }
                                 }   
@@ -169,12 +176,12 @@ $(".box").click(function(){
                 }   
             }
             if(convert !=0 ){
-                grid[row][col] = 1;
+                grid[row][col] = 1+moves%2;
                 changePlayer();
                 checkColor();
             }
         }
-    } else if (!current_player && !isOccupied) {
+    } else if (current_player== 2 && !isOccupied) {
         if(document.getElementById(surround[0].join("")).classList.contains("white")||document.getElementById(surround[1].join("")).classList.contains("white")||document.getElementById(surround[2].join("")).classList.contains("white")||document.getElementById(surround[3].join("")).classList.contains("white")||document.getElementById(surround[4].join("")).classList.contains("white")||document.getElementById(surround[5].join("")).classList.contains("white")||document.getElementById(surround[6].join("")).classList.contains("white")||document.getElementById(surround[7].join("")).classList.contains("white")){
             for(i=0;i<8;i++){
                 if(row<grid.length && row>-1 && col<grid.length && col>-1){
@@ -187,18 +194,18 @@ $(".box").click(function(){
                     newCol = col + chCol;
                         for(j=0;j<grid.length;j++){
                             if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
-                                if(grid[newRow][newCol] == 1){
+                                if(grid[newRow][newCol] == 1+(1+moves)%2){
                                     newRow += chRow;
                                     newCol += chCol;
                                     count++;
-                                } else if(grid[newRow][newCol] == 2){ 
+                                } else if(grid[newRow][newCol] == 1+moves%2){ 
                                     if(count != 0){
                                         let nRow = newRow;
                                         let nCol = newCol;
                                         for(x=0;x<count;x++){
                                             nRow -= chRow;
                                             nCol -= chCol;
-                                            grid[nRow][nCol] = 2;
+                                            grid[nRow][nCol] = 1+moves%2;
                                             convert++;
                                         }
                                     }   
@@ -210,20 +217,20 @@ $(".box").click(function(){
                 }  
             }
             if(convert!=0){
-                grid[row][col] = 2;
+                grid[row][col] = 1+moves%2;
                 changePlayer();
                 checkColor();
             }
         }
     }
-
 checkWinner();
+showPossibleMoves();
 });
 
 
 function changePlayer(){
-    current_player = current_player ? 0 : 1;
-    if(current_player){
+    current_player = 1 + (1+moves)%2
+    if(current_player==1){
         $(".turn").text("It's Time for Coffee");
     } else {
         $(".turn").text("It's Time for Tea");
@@ -231,3 +238,60 @@ function changePlayer(){
 moves++;
 }
 
+findPossibleMoves = (r,c,dir) => {
+    if(grid[r][c]!= (1+(moves%2)))
+    return;
+    var row = r;
+    var col = c;
+    var changeRow = [-1,0,1,1,1,0,-1,-1] ;
+    var changeCol = [-1,-1,-1,0,1,1,1,0] ;  
+    var cRow = changeRow[dir];
+    var cCol = changeCol[dir];
+    var other = 1+(1+moves)%2;
+    row += cRow ;
+    col += cCol ; 
+    if(row>=0&&row<8&&col>=0&&col<8){
+    if(grid[row][col] ==0){
+        return ;    
+    }}else{
+        return ;
+    }
+    while(row>=0&&row<8&&col>=0&&col<8){
+       if(other==parseInt(grid[row][col])){
+            row += cRow ;
+            col += cCol ; 
+            }
+        else{
+            break ;
+        }
+    }
+    if(row<0||row>7||col<0||col>7){
+        return ;
+    }
+    if( grid[row][col] ==0 ){
+    grid[row][col] = 3;
+    }
+checkColor();
+}
+
+showPossibleMoves = () => {
+    for(let row=0;row<8;row++){
+        for(let col=0;col<8;col++){
+            for(let dir=0;dir<8;dir++){
+                findPossibleMoves(row,col,dir);
+            }
+        }
+    }
+}   
+
+hidePossibleMoves = function(){
+    for(let row=0;row<8;row++){
+        for(let col=0;col<8;col++){
+            if(grid[row][col]==3)
+                grid[row][col] = 0;
+        }
+    }
+}
+
+showPossibleMoves();
+checkColor();

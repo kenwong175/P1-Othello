@@ -61,11 +61,19 @@ body {
     background-repeat: no-repeat;
 }
 
-.scoreboard {
+.gray {
+    background: blue;
+}
+
+.scoreboard, .bottom {
     display: flex;
     justify-content: center;
     text-align: center;
     margin-bottom: 10px;
+}
+
+.bottom {
+    justify-content: space-between;
 }
 
 .blackCount *, .whiteCount *{
@@ -183,9 +191,6 @@ body {
     opacity: 0;
     transition: all .3s ease-in-out 0s;
 }
-
-  
-
   
 #start::after {
     content: '';
@@ -218,3 +223,7 @@ body {
     }
 }
 
+audio {
+    height: 30px;
+    margin-top: 15px;
+}
