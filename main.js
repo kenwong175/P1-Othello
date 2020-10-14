@@ -225,6 +225,11 @@ $(".box").click(function(){
     }
 checkWinner();
 showPossibleMoves();
+let grayCount = document.querySelectorAll(".gray").length;
+    if(grayCount == 0){
+        changePlayer();
+        moves--;
+    }
 });
 
 
