@@ -233,11 +233,15 @@ if(convert!=0){
         arr = [];
     for(i=0;i<document.getElementsByClassName("gray").length;i++){
         arr.push(document.getElementsByClassName("gray")[i].id);
-        console.log(arr);
+    }
+    hidePossibleMoves();
+    for(i=0;i<arr.length;i++){
+        id = arr[i];
+        
     }
     let randomPick = parseInt(Math.random()*(arr.length-1));
     console.log(randomPick);
-    hidePossibleMoves();
+    
     id = arr[randomPick];
     loc = id.split("");
     row = Number(loc[0]);
