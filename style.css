@@ -35,7 +35,7 @@ body {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: 0px;
-    /* background: white; */
+    background: rgba(255, 226, 226, 0.322);
     border: 1px solid black;
 }
 
@@ -61,11 +61,11 @@ body {
     background-repeat: no-repeat;
 }
 
-.gray {
-    background: blue;
+.gray:hover {
+    background-image: url("cupTea_NW.png");
 }
 
-.scoreboard, .bottom {
+.scoreboard, .bottom{
     display: flex;
     justify-content: center;
     text-align: center;
@@ -74,6 +74,11 @@ body {
 
 .bottom {
     justify-content: space-between;
+}
+
+.top{
+    display: flex;
+    justify-content: space-around;
 }
 
 .blackCount *, .whiteCount *{

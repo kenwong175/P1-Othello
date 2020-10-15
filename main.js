@@ -218,70 +218,70 @@ $(".box").click(function(){
             }
         }
 checkWinner();
-showPossibleMoves();
-let grayCount = document.querySelectorAll(".gray").length;
-    if(grayCount == 0){
-        if(blackCount>whiteCount){
-            $(".turn").text("Tea dominated");
-        } else if(whiteCount>blackCount) {
-            $(".turn").text("Coffee dominated");
-        } else {
-            $(".turn").text("It's a tie!");
-        }
-    }
-    arr = [];
-for(i=0;i<document.getElementsByClassName("gray").length;i++){
-    arr.push(document.getElementsByClassName("gray")[i].id);
-    console.log(arr);
-}
-let randomPick = parseInt(Math.random()*(arr.length-1));
-console.log(randomPick);
-hidePossibleMoves();
-id = arr[randomPick];
-loc = id.split("");
-row = Number(loc[0]);
-col = Number(loc[1]);
-count = 0;
-convert = 0;
-for(i=0;i<8;i++){
-    if(row<grid.length && row>-1 && col<grid.length && col>-1){
-    count = 0;
-    chRow = checkRow[i];
-    chCol = checkCol[i];
-    let newRow = 0;
-    let newCol = 0;
-    newRow = row + chRow;
-    newCol = col + chCol;
-        for(j=0;j<grid.length;j++){
-            if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
-                if(grid[newRow][newCol] == 1+(1+moves)%2){
-                    newRow += chRow;
-                    newCol += chCol;
-                    count++;
-                } else if(grid[newRow][newCol] == 1+moves%2){ 
-                    if(count != 0){
-                        let nRow = newRow;
-                        let nCol = newCol;
-                        for(x=0;x<count;x++){
-                            nRow -= chRow;
-                            nCol -= chCol;
-                            grid[nRow][nCol] = 1+moves%2;
-                            convert++;
-                        }
-                    }   
-                } else if(grid[newRow][newCol] == 0){
-                    break;
-                }
+if(convert!=0){
+    showPossibleMoves();
+    let grayCount = document.querySelectorAll(".gray").length;
+        if(grayCount == 0){
+            if(blackCount>whiteCount){
+                $(".turn").text("Tea dominated");
+            } else if(whiteCount>blackCount) {
+                $(".turn").text("Coffee dominated");
+            } else {
+                $(".turn").text("It's a tie!");
             }
         }
-    }   
-}
-if(convert !=0 ){
+        arr = [];
+    for(i=0;i<document.getElementsByClassName("gray").length;i++){
+        arr.push(document.getElementsByClassName("gray")[i].id);
+        console.log(arr);
+    }
+    let randomPick = parseInt(Math.random()*(arr.length-1));
+    console.log(randomPick);
+    hidePossibleMoves();
+    id = arr[randomPick];
+    loc = id.split("");
+    row = Number(loc[0]);
+    col = Number(loc[1]);
+    count = 0;
+    convert = 0;
+    for(i=0;i<8;i++){
+        if(row<grid.length && row>-1 && col<grid.length && col>-1){
+        count = 0;
+        chRow = checkRow[i];
+        chCol = checkCol[i];
+        let newRow = 0;
+        let newCol = 0;
+        newRow = row + chRow;
+        newCol = col + chCol;
+            for(j=0;j<grid.length;j++){
+                if(newRow<grid.length && newRow>-1 && newCol<grid.length && newCol>-1){
+                    if(grid[newRow][newCol] == 1+(1+moves)%2){
+                        newRow += chRow;
+                        newCol += chCol;
+                        count++;
+                    } else if(grid[newRow][newCol] == 1+moves%2){ 
+                        if(count != 0){
+                            let nRow = newRow;
+                            let nCol = newCol;
+                            for(x=0;x<count;x++){
+                                nRow -= chRow;
+                                nCol -= chCol;
+                                grid[nRow][nCol] = 1+moves%2;
+                                convert++;
+                            }
+                        }   
+                    } else if(grid[newRow][newCol] == 0){
+                        break;
+                    }
+                }
+            }
+        }   
+    }
     grid[row][col] = 1+moves%2;
     changePlayer();
     checkColor();
+    checkWinner();
 }
-checkWinner();
 showPossibleMoves();
 });
 
