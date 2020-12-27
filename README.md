@@ -20,10 +20,10 @@ This is a project using HTML/CSS/DOM to design a simple game for better understa
 ### User Stories
 
 Landing Page
-![1](https://github.com/kenwong175/P1-Othello/blob/master/Screenshot%2020-12-27%at%2.26.01%PM.png)
+![1](https://github.com/kenwong175/P1-Othello/blob/master/Screenshot%202020-12-27%20at%202.26.01%20PM.png)
 
 Game Page
-![2](https://github.com/kenwong175/P1-Othello/blob/master/Screenshot%2020-12-27%at%2.26.50%PM.png)
+![2](https://github.com/kenwong175/P1-Othello/blob/master/Screenshot%202020-12-27%20at%202.26.50%20PM.png)
 
 ## Planning and Development Process
 
